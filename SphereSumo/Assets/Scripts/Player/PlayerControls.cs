@@ -12,16 +12,21 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float currentSpeed, maxSpeed;
 
     //Modifiers
+    [SerializeField] DeathCheck deathCheck;
     bool isAbleToMove = true;
+    bool isDead;
 
     void Update()
     {
         GetJoystickValues();
+
+        isDead = deathCheck.GetIsDead();
     }
 
     private void FixedUpdate()
     {
-        MoveAndLookPlayer();
+        if(!isDead)
+            MoveAndLookPlayer();
     }
 
     #region Movement
@@ -39,7 +44,7 @@ public class PlayerControls : MonoBehaviour
 
         if(isAbleToMove)
             this.transform.Translate(direction * Time.deltaTime * currentSpeed, Space.World);
-
+            
         //Rotating player
         Vector3 lookAtDirection = this.transform.position + direction;
         this.transform.LookAt(lookAtDirection);
@@ -56,10 +61,12 @@ public class PlayerControls : MonoBehaviour
 
     #region Get & Set
 
-    public void CanMove(bool condition)
+    public void CanMove(bool condition, bool disableForever)
     {
         isAbleToMove = condition;
-        StartCoroutine("ResetMovementBool");
+
+        if(!disableForever)
+            StartCoroutine("ResetMovementBool");
     }
 
     public float GetCurrentSpeed()
