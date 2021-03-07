@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIMenu : MonoBehaviour
 {
@@ -10,7 +11,12 @@ public class UIMenu : MonoBehaviour
     
     public void PlayGame()
     {
-            
+        SceneManager.LoadScene(1);
+    }
+
+    public void GotoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void HowToPlay()
