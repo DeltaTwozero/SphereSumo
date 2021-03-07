@@ -56,10 +56,14 @@ public class PlayerControls : MonoBehaviour
 
     #region Get & Set
 
-    public void CanMove(bool condition)
+
+
+    public void CanMove(bool condition, bool disableForever)
     {
         isAbleToMove = condition;
-        StartCoroutine("ResetMovementBool");
+
+        if(!disableForever)
+            StartCoroutine("ResetMovementBool");
     }
 
     public float GetCurrentSpeed()
