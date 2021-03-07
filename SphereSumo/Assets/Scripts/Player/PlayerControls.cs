@@ -13,6 +13,7 @@ public class PlayerControls : MonoBehaviour
 
     //Modifiers
     [SerializeField] DeathCheck deathCheck;
+    [SerializeField] GroundCheck groundCheck;
     bool isAbleToMove = true;
     bool isDead;
 
@@ -20,7 +21,8 @@ public class PlayerControls : MonoBehaviour
     {
         GetJoystickValues();
 
-        isDead = deathCheck.GetIsDead();
+        //isDead = deathCheck.GetIsDead();
+        isDead = groundCheck.GetIsDead();
     }
 
     private void FixedUpdate()

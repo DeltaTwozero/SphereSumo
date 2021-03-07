@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     public GameObject GetRandomTarget()
     {
         int random = Random.Range(0, playerList.Count);
-        print(random);
         randomTarget = playerList[random];
 
         return randomTarget;
