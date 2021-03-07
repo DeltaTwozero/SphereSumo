@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerControls : MonoBehaviour
 
     //Modifiers
     [SerializeField] DeathCheck deathCheck;
+    [SerializeField] GroundCheck groundCheck;
     bool isAbleToMove = true;
     bool isDead;
 
@@ -20,7 +22,8 @@ public class PlayerControls : MonoBehaviour
     {
         GetJoystickValues();
 
-        isDead = deathCheck.GetIsDead();
+        //isDead = deathCheck.GetIsDead();
+        isDead = groundCheck.GetIsDead();
     }
 
     private void FixedUpdate()
@@ -74,4 +77,9 @@ public class PlayerControls : MonoBehaviour
         return currentSpeed;
     }
     #endregion
+
+    private void OnDestroy()
+    {
+        SceneManager.LoadScene(2);
+    }
 }

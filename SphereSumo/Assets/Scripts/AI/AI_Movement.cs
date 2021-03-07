@@ -10,6 +10,7 @@ public class AI_Movement : MonoBehaviour
 
     //Reference to Death Check
     [SerializeField] DeathCheck deathCheck;
+    [SerializeField] GroundCheck groundCheck;
 
     //AI varibales
     [SerializeField] NavMeshAgent myAgent;
@@ -27,7 +28,8 @@ public class AI_Movement : MonoBehaviour
 
     private void Update()
     {
-        isDead = deathCheck.GetIsDead();
+        //isDead = deathCheck.GetIsDead();
+        isDead = groundCheck.GetIsDead();
 
         if(isDead)
             myAgent.updatePosition = false;
@@ -58,8 +60,8 @@ public class AI_Movement : MonoBehaviour
     {
         myTarget = gameManager.GetRandomTarget();
 
-        //if (myTarget = this.gameObject)
-        //    GetTarget();
+        if (myTarget = this.gameObject)
+            StartCoroutine("CoroutineGetTarget");
     }
 
     IEnumerator ResetMovementBool()
@@ -76,10 +78,8 @@ public class AI_Movement : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         myTarget = gameManager.GetRandomTarget();
 
-        /*if(myTarget == this.gameObject)
-            GetTarget();*/
-
-        print(myTarget.name);
+        if(myTarget == this.gameObject)
+            GetTarget();
     }
 
     private void OnCollisionEnter(Collision collision)
