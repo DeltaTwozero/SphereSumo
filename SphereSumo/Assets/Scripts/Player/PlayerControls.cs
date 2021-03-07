@@ -9,7 +9,10 @@ public class PlayerControls : MonoBehaviour
     float joyVertical, joyHorizontal;
 
     //Movement values
-    [SerializeField] float moveSpeed;
+    [SerializeField] float currentSpeed, maxSpeed;
+
+    //Modifiers
+    bool isAbleToMove = true;
 
     void Update()
     {
@@ -33,11 +36,35 @@ public class PlayerControls : MonoBehaviour
     {
         //Moving player
         Vector3 direction = new Vector3(joyHorizontal, 0, joyVertical).normalized;
-        this.transform.Translate(direction * Time.deltaTime * moveSpeed, Space.World);
+
+        if(isAbleToMove)
+            this.transform.Translate(direction * Time.deltaTime * currentSpeed, Space.World);
 
         //Rotating player
         Vector3 lookAtDirection = this.transform.position + direction;
         this.transform.LookAt(lookAtDirection);
-    } 
+    }
+
+    IEnumerator ResetMovementBool()
+    {
+        //Activating player movement
+        yield return new WaitForSeconds(.5f);
+        isAbleToMove = true;
+        //print(isAbleToMove);
+    }
+    #endregion
+
+    #region Get & Set
+
+    public void CanMove(bool condition)
+    {
+        isAbleToMove = condition;
+        StartCoroutine("ResetMovementBool");
+    }
+
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
     #endregion
 }
