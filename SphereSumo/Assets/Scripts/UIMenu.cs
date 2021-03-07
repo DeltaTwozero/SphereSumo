@@ -9,19 +9,19 @@ public class UIMenu : MonoBehaviour
     [SerializeField] GameObject HowToPanel; 
     
     public void PlayGame()
-        {
+    {
             
-        }
+    }
 
     public void HowToPlay()
-        {
-            MainMenuPanel.SetActive(false);
-            HowToPanel.SetActive(true);
-        }
+    {
+        MainMenuPanel.SetActive(false);
+        HowToPanel.SetActive(true);
+    }
 
     public void BackToMain()
-        {
-            MainMenuPanel.SetActive(true);
-            HowToPanel.SetActive(false);
-        }
+    {
+        MainMenuPanel.SetActive(true);
+        HowToPanel.SetActive(false);
+    }
 }
